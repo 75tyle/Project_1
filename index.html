@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sole Swap - Online Shoe Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .product img {
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .product-details {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .product-details h3 {
+            margin-top: 0;
+        }
+        .product-details p {
+            margin: 5px 0;
+        }
+        .product-details button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product-details button:hover {
+            background-color: #555;
+        }
+        .cart {
+            margin-top: 20px;
+        }
+        .cart table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cart th, .cart td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        .cart th {
+            background-color: #333;
+            color: #fff;
+        }
+        .cart td img {
+            width: 50px;
+            height: auto;
+        }
+        .checkout-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+        .checkout-btn:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sole Swap - Online Shoe Market</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Shop</a>
+        <a href="/listing.html">Add Product</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <h2>Welcome to Sole Swap</h2>
+            <div class="product">
+                <img src="product1.jpg" alt="Product Image">
+                <div class="product-details">
+                    <h3>Product Name</h3>
+                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget purus vehicula, viverra lorem at, molestie nunc.</p>
+                    <p>Price: $49.99</p>
+                    <button onclick="addToCart('Product Name', 49.99)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Add more products here -->
+            <div class="cart">
+                <h3>Shopping Cart</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Cart items will be dynamically added here -->
+                    </tbody>
+                </table>
+                <p>Total: $<span id="cart-total">0.00</span></p>
+                <button class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Sole Swap - Online Shoe Market
+    </footer>
+
+    <script>
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            cartTotal += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+
+            cartItemsElement.innerHTML = '';
+            cart.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td>1</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                `;
+                cartItemsElement.appendChild(row);
+            });
+
+            cartTotalElement.textContent = cartTotal.toFixed(2);
+        }
+    </script>
+</body>
+</html>
