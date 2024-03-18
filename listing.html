@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product - Fashion Emporium</title>
+    <title>Sole Swap - Online Shoe Market</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,7 +87,7 @@
     </div>
 
     <script>
-        var products = [];
+        let products = JSON.parse(localStorage.getItem('products')) || [];
         document.getElementById('product-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -109,6 +109,7 @@
             // Redirect to home page
             window.location.href = 'index.html';
         });
+        
     </script>
 </body>
 </html>
