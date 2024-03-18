@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sole Swap - Online Shoe Market</title>
     <style>
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -44,7 +45,9 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            background-color: #fff;
         }
+
         .product img {
             width: 200px;
             height: auto;
@@ -52,16 +55,20 @@
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+
         .product-details {
             padding: 20px;
             flex-grow: 1;
         }
+
         .product-details h3 {
             margin-top: 0;
         }
+
         .product-details p {
             margin: 5px 0;
         }
+
         .product-details button {
             background-color: #333;
             color: #fff;
@@ -115,7 +122,7 @@
 </head>
 <body>
     <header>
-        <h1>Sole Swap - Online Shoe Market</h1>
+        <h1>Fashion Emporium - Online Boutique</h1>
     </header>
     <nav>
         <a href="#">Home</a>
@@ -126,69 +133,41 @@
     </nav>
     <div class="container">
         <div class="content">
-            <h2>Welcome to Sole Swap</h2>
-            <div class="product">
-                <img src="product1.jpg" alt="Product Image">
-                <div class="product-details">
-                    <h3>Product Name</h3>
-                    <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eget purus vehicula, viverra lorem at, molestie nunc.</p>
-                    <p>Price: $49.99</p>
-                    <button onclick="addToCart('Product Name', 49.99)">Add to Cart</button>
-                </div>
-            </div>
-            <!-- Add more products here -->
-            <div class="cart">
-                <h3>Shopping Cart</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cart-items">
-                        <!-- Cart items will be dynamically added here -->
-                    </tbody>
-                </table>
-                <p>Total: $<span id="cart-total">0.00</span></p>
-                <button class="checkout-btn">Checkout</button>
+            <h2>Welcome to Fashion Emporium</h2>
+            <div id="product-list">
+                <!-- Product list will be dynamically added here -->
             </div>
         </div>
     </div>
     <footer>
-        &copy; 2024 Sole Swap - Online Shoe Market
+        &copy; 2024 Fashion Emporium - Online Boutique
     </footer>
 
     <script>
-        let cart = [];
-        let cartTotal = 0;
+        // Load products from local storage
+        let products = JSON.parse(localStorage.getItem('products')) || [];
 
-        function addToCart(productName, price) {
-            cart.push({ name: productName, price: price });
-            cartTotal += price;
-            updateCart();
-        }
+        // Display products on the home page
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
 
-        function updateCart() {
-            const cartItemsElement = document.getElementById('cart-items');
-            const cartTotalElement = document.getElementById('cart-total');
-
-            cartItemsElement.innerHTML = '';
-            cart.forEach(item => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${item.name}</td>
-                    <td>$${item.price.toFixed(2)}</td>
-                    <td>1</td>
-                    <td>$${item.price.toFixed(2)}</td>
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.innerHTML = `
+                    <div class="product-details">
+                        <h3>${product.name}</h3>
+                        <p>Description: ${product.description}</p>
+                        <p>Price: $${product.price.toFixed(2)}</p>
+                    </div>
                 `;
-                cartItemsElement.appendChild(row);
+                productList.appendChild(productDiv);
             });
-
-            cartTotalElement.textContent = cartTotal.toFixed(2);
         }
+
+        // Initially display products
+        displayProducts();
     </script>
 </body>
 </html>
